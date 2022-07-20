@@ -7,7 +7,7 @@ export class RedisService {
 
   constructor() {
     this.redis = createClient({
-      url: 'redis://localhost:6379',
+      url: process.env.REDIS_URL,
     });
 
     this.redis.connect();
