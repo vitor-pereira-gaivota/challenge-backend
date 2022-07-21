@@ -126,6 +126,7 @@ export class ClientsService {
           },
           updatedBy: userId,
         },
+        include: { peoples: true, locals: true },
       });
 
       await this.redisService.del(CacheEnum.CLIENTS_SELECT, CacheEnum.CLIENTS);

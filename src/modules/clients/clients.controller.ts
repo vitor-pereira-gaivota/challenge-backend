@@ -16,6 +16,8 @@ import { UserRequest } from 'src/common/interfaces/userRequest';
 import {
   ClientsPaginatedPresenter,
   ClientsPresenter,
+  ClientsSelectPresenter,
+  ClientsSimplePresenter,
 } from './clients.presenter';
 import { ClientsService } from './clients.service';
 import { CreateClientNestedDto } from './dto/create-client-nested.dto';
@@ -35,33 +37,35 @@ export class ClientsController {
   @Post()
   @ApiResponse({
     status: 201,
+    type: ClientsSimplePresenter,
   })
   async create(
     @Body() createClientDto: CreateClientDto,
     @Request() req: UserRequest,
-  ) {
+  ): Promise<ClientsSimplePresenter> {
     const client = await this.clientsService.create(
       createClientDto,
       req.raw.user.id,
     );
 
-    return client;
+    return new ClientsSimplePresenter(client);
   }
 
   @Post('/nested')
   @ApiResponse({
     status: 201,
+    type: ClientsPresenter,
   })
   async createNested(
     @Body() createClientNestedDto: CreateClientNestedDto,
     @Request() req: UserRequest,
-  ) {
+  ): Promise<ClientsPresenter> {
     const client = await this.clientsService.createNested(
       createClientNestedDto,
       req.raw.user.id,
     );
 
-    return client;
+    return new ClientsPresenter(client);
   }
 
   @Get()
@@ -69,15 +73,21 @@ export class ClientsController {
     status: 200,
     type: ClientsPaginatedPresenter,
   })
-  async findAll() {
+  async findAll(): Promise<ClientsPaginatedPresenter> {
     const clients = await this.clientsService.findAll();
 
-    return clients;
+    return new ClientsPaginatedPresenter(clients);
   }
 
   @Get('/select')
-  findSelect() {
-    return this.clientsService.findSelect();
+  @ApiResponse({
+    status: 200,
+    type: ClientsSelectPresenter,
+  })
+  async findSelect(): Promise<ClientsSelectPresenter> {
+    const clients = await this.clientsService.findSelect();
+
+    return new ClientsSelectPresenter(clients);
   }
 
   @Get(':id')
@@ -88,7 +98,7 @@ export class ClientsController {
   async findOne(@Param('id') id: string): Promise<ClientsPresenter> {
     const client = await this.clientsService.findOne(+id);
 
-    return client;
+    return new ClientsPresenter(client);
   }
 
   @Put(':id')
@@ -108,7 +118,7 @@ export class ClientsController {
       req.raw.user.id,
     );
 
-    return client;
+    return new ClientsPresenter(client);
   }
 
   @Put('/replace')

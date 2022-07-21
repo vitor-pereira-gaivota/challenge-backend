@@ -97,3 +97,22 @@ export class ClientsSimplePresenter {
     this.id = client.id;
   }
 }
+
+class ClientSelectData {
+  @ApiProperty()
+  @IsNumber()
+  id: number;
+
+  @ApiProperty()
+  @IsString()
+  name: string;
+}
+
+export class ClientsSelectPresenter {
+  @ApiProperty({ type: () => ClientSelectData, isArray: true })
+  data: ClientSelectData[];
+
+  constructor(client: Clients[]) {
+    this.data = client.map((c) => ({ id: c.id, name: c.name }));
+  }
+}
