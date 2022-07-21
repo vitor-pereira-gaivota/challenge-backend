@@ -4,12 +4,12 @@ import {
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
-import { PeopleModule } from './people/people.module';
+import { PeopleModule } from './modules/people/people.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { ClientsModule } from './clients/clients.module';
+import { ClientsModule } from './modules/clients/clients.module';
 import { AuthMiddleware } from './common/middlewares/auth.middleware';
-import { UsersRepository } from './users/user.repository';
-import { LocalsModule } from './locals/locals.module';
+import { UsersRepository } from './modules/users/user.repository';
+import { LocalsModule } from './modules/locals/locals.module';
 import { RedisModule } from './redis/redis.module';
 
 @Module({

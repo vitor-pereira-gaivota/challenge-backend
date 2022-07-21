@@ -5,7 +5,7 @@ import {
   NestMiddleware,
 } from '@nestjs/common';
 import * as jwt from 'jsonwebtoken';
-import { UsersRepository } from 'src/users/user.repository';
+import { UsersRepository } from 'src/modules/users/user.repository';
 
 interface TokenData {
   id: number;

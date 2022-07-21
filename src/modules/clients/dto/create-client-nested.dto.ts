@@ -6,8 +6,8 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { CreateLocalDto } from 'src/locals/dto/create-local.dto';
-import { CreatePersonDto } from 'src/people/dto/create-person.dto';
+import { CreateLocalDto } from 'src/modules/locals/dto/create-local.dto';
+import { CreatePersonDto } from 'src/modules/people/dto/create-person.dto';
 
 export class CreateClientNestedDto {
   @ApiProperty({ required: true })

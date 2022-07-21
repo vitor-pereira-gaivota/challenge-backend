@@ -16,7 +16,6 @@ import { UserRequest } from 'src/common/interfaces/userRequest';
 import {
   ClientsPaginatedPresenter,
   ClientsPresenter,
-  ClientsSimplePresenter,
 } from './clients.presenter';
 import { ClientsService } from './clients.service';
 import { CreateClientNestedDto } from './dto/create-client-nested.dto';
