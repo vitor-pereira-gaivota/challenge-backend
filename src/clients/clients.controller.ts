@@ -19,6 +19,7 @@ import {
   ClientsSimplePresenter,
 } from './clients.presenter';
 import { ClientsService } from './clients.service';
+import { CreateClientNestedDto } from './dto/create-client-nested.dto';
 import { CreateClientDto } from './dto/create-client.dto';
 import { ReplaceClientDto } from './dto/replace-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
@@ -35,7 +36,6 @@ export class ClientsController {
   @Post()
   @ApiResponse({
     status: 201,
-    type: ClientsSimplePresenter,
   })
   async create(
     @Body() createClientDto: CreateClientDto,
@@ -43,6 +43,22 @@ export class ClientsController {
   ) {
     const client = await this.clientsService.create(
       createClientDto,
+      req.raw.user.id,
+    );
+
+    return client;
+  }
+
+  @Post('/nested')
+  @ApiResponse({
+    status: 201,
+  })
+  async createNested(
+    @Body() createClientNestedDto: CreateClientNestedDto,
+    @Request() req: UserRequest,
+  ) {
+    const client = await this.clientsService.createNested(
+      createClientNestedDto,
       req.raw.user.id,
     );
 
