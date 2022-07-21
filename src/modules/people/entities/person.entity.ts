@@ -1,8 +1,10 @@
-export class Person {
+import { Peoples } from '@prisma/client';
+
+export class Person implements Peoples {
   id: number;
   name: string;
   documentNumber: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   updatedBy: number;
 }

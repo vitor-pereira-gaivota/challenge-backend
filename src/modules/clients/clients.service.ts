@@ -108,7 +108,7 @@ export class ClientsService {
 
   async update(id: number, updateClientDto: UpdateClientDto, userId: number) {
     return this.prismaService.$transaction(async (prisma) => {
-      const client = await prisma.clients.findFirst({
+      const client = await prisma.clients.findUnique({
         where: { id },
       });
 
